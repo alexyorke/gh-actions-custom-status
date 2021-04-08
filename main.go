@@ -35,7 +35,7 @@ func main() {
 		StringVar(rs.Description)
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
-	envVars := []string{"GITHUB_TOKEN", "GITHUB_REPOSITORY", "LAST_COMMIT_SHA"}
+	envVars := []string{"TEST", "GITHUB_REPOSITORY", "LAST_COMMIT_SHA"}
 	for _, r := range envVars {
 		if os.Getenv(r) == "" {
 			log.Fatalln("env var not set correctly")
@@ -49,7 +49,7 @@ func main() {
 	githubRepo := strings.Split(os.Getenv("GITHUB_REPOSITORY"), "/")
 
 	// Setup GitHub client.
-	ghToken := os.Getenv("GITHUB_TOKEN")
+	ghToken := os.Getenv("TEST")
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: ghToken})
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
